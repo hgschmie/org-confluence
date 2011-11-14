@@ -45,7 +45,8 @@ Everything else. It is, pretty much, dumb as a rock.
 What would be cool
 ------------------
 
-Integration with http://code.google.com/p/confluence-el/
+- Integration with http://code.google.com/p/confluence-el/
+- reformat existing text blocks to be lines without breaks (confluence likes it this way).
 
 
 

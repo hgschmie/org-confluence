@@ -21,6 +21,16 @@
 	("=" "\{\{%s\}\}" nil))
   "The list of fontification expressions for confluence.")
 
+(setq org-confluence-link-analytic-regexp
+	(concat
+	 "\\[\\["
+	 "\\(\\(" (mapconcat 'regexp-quote (cons "confluence" org-link-types) "\\|") "\\):\\)?"
+	 "\\([^]]+\\)"
+	 "\\]"
+	 "\\(\\[" "\\([^]]+\\)" "\\]\\)?"
+	 "\\]"))
+
+
 (defun org-confluence-export ()
   "Export the current buffer to Confluence."
   (interactive)
@@ -56,15 +66,15 @@
 (defun org-confluence-export-links ()
   "Replace Org links with confluence links."
   ;; FIXME: This function could be more clever, of course.
-  (while (re-search-forward org-bracket-link-analytic-regexp nil t)
+  (while (re-search-forward org-confluence-link-analytic-regexp nil t)
 	(cond ((and (equal (match-string 1) "file:")
-		(save-match-data
-		  (string-match (org-image-file-name-regexp) (match-string 3))))
-	   (replace-match 
-		(concat "!" (file-name-nondirectory (match-string 3)))))
-	  (t 
-	   (replace-match 
-		(concat "[\\1\\3" (if (match-string 5) " \\5]" "]")))))))
+                (save-match-data
+                  (string-match (org-image-file-name-regexp) (match-string 3))))
+           (replace-match  (concat "!" (file-name-nondirectory (match-string 3)))))
+          ((equal (match-string 1) "confluence:")
+           (replace-match (concat "[\\3]")))
+          (t 
+           (replace-match (concat "[" (if (match-string 5) "\\5|" "") "\\1\\3]"))))))
 
 (defun org-confluence-format-source-code-or-example (lines lang caption textareap
                                                            cols rows num cont

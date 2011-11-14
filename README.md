@@ -11,15 +11,17 @@ I would feel embarrassed to claim any copyright on this.
 Installation
 ------------
 
-Get the latest version of org-mode from
-git://repo.or.cz/org-mode.git. Install it and make sure that your
-emacs has access to the org-export.el file (which is is EXPERIMENTAL).
+Get a version of org-mode. It is possible to use the latest version of
+org-mode from git://repo.or.cz/org-mode.git, but the 7.7 release works too. 
+
+Install it and make sure that your emacs has access to the
+org-export.el file (which is is EXPERIMENTAL). Or use the one provided here.
 
 Copy org-confluence.el onto the load path of the emacs installation.
 
 Add
 
-(require 'org-confluence)
+    (require 'org-confluence)
 
 to the .emacs startup file.
 
@@ -31,6 +33,7 @@ What it does
 - bold, italics, underline, strikethrough and monospaced text.
 - headings
 - links
+- support Confluence internal links with `confluence:Space:Page` notation.
 - BLOCK_SRC and BLOCK_EXAMPLE to code blocks
 - lists (unnumbered and numbered)
 - tables (header lines, body lines)
